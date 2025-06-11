@@ -79,6 +79,11 @@ body{
 
 }
 
+
+#todo-input{
+    font-size: 16px;
+}
+
 #todo-list {
     list-style: none; /* Rimuove i pallini delle liste */
     padding: 0;
