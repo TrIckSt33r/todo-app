@@ -9,7 +9,7 @@ console.log('Elementi DOM selezionati:', {todoInput, addTodoBtn, todoList});
 
 const LOCAL_STORAGE_KEY = 'Task';
 
-const MAX_TASK_LENGTH = 40;
+const MAX_TASK_LENGTH = 100;
 
 let tasks = [];
 
@@ -36,9 +36,24 @@ function savetask() {
 function renderTasks() {
     todoList.innerHTML = '';
 
+
     tasks.forEach((task, index) => {
         const listItem = document.createElement('li');
-        listItem.innerHTML = task.text;
+
+        const textContainer = document.createElement('div');
+        
+        textContainer.classList.add('text-container');
+
+        listItem.appendChild(textContainer);
+
+        
+        const taskText = document.createElement('p');
+
+        taskText.classList.add('task-text');
+
+        textContainer.appendChild(taskText);
+
+        taskText.innerHTML = task.text;
 
 
 
@@ -55,6 +70,7 @@ function renderTasks() {
         completedButton.addEventListener('click', completeTask);
 
         const actionDiv = document.createElement('div');
+        actionDiv.classList.add('action-div')
         
         
 
@@ -100,7 +116,7 @@ function completeTask(event) {
 
 // funzione per rimuovere la task
 function removeTask(event) {
-    const indexToRemove = parseInt(event.target.dataset.index);
+    const indexToRemove = parseInt(event.currentTarget.dataset.index);
     tasks.splice(indexToRemove, 1);
     savetask();
     renderTasks();
@@ -135,12 +151,12 @@ function addTask () {
 
      if (taskText === '') {
         alert("Il testo della task non può essere vuoto.");
-        return; // Esci dalla funzione se il testo è vuoto
+        return; 
     }
 
     if (taskText.length > MAX_TASK_LENGTH) {
         alert(`Il testo della task è troppo lungo! Massimo ${MAX_TASK_LENGTH} caratteri.`);
-        return; // Esci dalla funzione se il testo è troppo lungo
+        return; 
     }
 
     if (taskText !== '') {
