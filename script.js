@@ -130,7 +130,7 @@ function editTask(event) {
 
     const newText = prompt('inserisci la nuova task', oldText);
 
-    if(newText === "") {
+    if(newText.trim() === "" || newText === null) {
         alert("il testo non puo essere vuoto");
         return;
     }
