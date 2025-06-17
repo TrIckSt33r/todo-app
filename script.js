@@ -106,7 +106,6 @@ function renderTasks() {
 //funzione per modificare lo stato della task
 function completeTask(event) {
     const index = parseInt(event.currentTarget.dataset.index);
-
     tasks[index].completed = !tasks[index].completed;
 
     savetask();
@@ -130,6 +129,11 @@ function editTask(event) {
     const oldText = tasks[indexToEdit].text;
 
     const newText = prompt('inserisci la nuova task', oldText);
+
+    if(newText === "") {
+        alert("il testo non puo essere vuoto");
+        return;
+    }
 
     tasks[indexToEdit].text = newText;
 
